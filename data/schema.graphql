@@ -1,0 +1,67 @@
+# schema.graphql
+
+type Resident {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phoneNumber: String!
+  apartmentNumber: String!
+  pictures: ResidentPictures
+  status: ResidentStatus
+  newAddress: Address
+}
+
+type ResidentPictures {
+  thumbUrl: String
+  smallUrl: String
+  bigUrl: String
+}
+
+enum ResidentStatus {
+  CURRENT
+  FORMER
+}
+
+type Address {
+  street: String!
+  city: String!
+  state: String!
+  zipCode: String!
+}
+
+# Queries
+type Query {
+  getResident(id: ID!): Resident
+  getAllResidents: [Resident]
+}
+
+# Mutations
+type Mutation {
+  createResident(input: ResidentInput): Resident
+  updateResident(id: ID!, input: ResidentInput): Resident
+}
+
+input ResidentInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  phoneNumber: String!
+  apartmentNumber: String!
+  pictures: ResidentPicturesInput
+  status: ResidentStatus!
+  newAddress: AddressInput
+}
+
+input ResidentPicturesInput {
+  thumbUrl: String
+  smallUrl: String
+  bigUrl: String
+}
+
+input AddressInput {
+  street: String!
+  city: String!
+  state: String!
+  zipCode: String!
+}
